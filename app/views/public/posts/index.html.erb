@@ -1,0 +1,35 @@
+<div class="container" >
+    <div class="row">
+        <div class="col-md-3">
+          <%= render 'public/posts/list', customer: @customer, post: @post %>
+        </div>
+        <div class="col-md-8 offset-md-1">
+          <h1>Posts</h1>
+            <table class="table table-hover table-inverse">
+              <thead>
+                <tr>
+                  <th></th>
+                    <th>Title</th>
+                    <th>introduction</th>
+                    <th colspan="3"></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>
+                    <% @posts.each do |post| %>
+                    <%= link_to public_customer_path(post.customer) do %>
+                      <p><%= image_tag post.customer.profile_image(100,100) %></p>
+                    <% end %>
+                      <%= link_to public_posts_path(post) do %>
+                      <p><%= post.title %></p>
+                    <% end %>
+                    <p>Opinion <%= post.introduction %></p>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          <% end %>
+        </div>
+      </div>
+</div>

@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  namespace :public do
+    resources :customers,only: [:show, :index, :edit, :create]
+    resources :posts,only: [:show, :index, :edit, :create]
+  end
   devise_for :admin,skip: [:registrations, :passwords] , controllers: {
   sessions: "admin/sessions"
 }
@@ -6,7 +10,7 @@ Rails.application.routes.draw do
   registrations: "public/registrations",
   sessions: 'public/sessions'
 }
-  root "homes#top"		
+  root "homes#top"
   get "/home/about" => "homes#about", as: "about"
 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
