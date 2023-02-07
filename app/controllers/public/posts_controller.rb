@@ -29,6 +29,24 @@ class Public::PostsController < ApplicationController
     @post = Post.find(params[:id])
   end
 
+  def update
+    @post = Post.find(params[:id])
+  if @post.update(post_params)
+    flash[:notice] = "You have updated post successfully."
+    redirect_to public_posts_path(@post.id)
+  else
+    @posts = Post.all
+    @customer = current_customer
+    render:index
+  end
+  end
+
+  def destroy
+    @post = Post.find(params[:id])
+    @post.destroy
+    redirect_to '/public/posts'
+  end
+
   private
   def post_params
     params.require(:post).permit(:title, :introduction)

@@ -1,2 +1,29 @@
-<h1>Public::Posts#show</h1>
-<p>Find me in app/views/public/posts/show.html.erb</p>
+<div class="container" >
+    <div class="row">
+        <div class="col-md-3">
+          <%= render 'public/posts/list', customer: @customer, post: Post.new %>
+        </div>
+        <div class="col-md-8 offset-md-1">
+          <h1>Post detail</h1>
+            <div>
+              <%= flash[:notice] %>
+            </div>
+            <div>
+              <%= link_to public_posts_path(@post.id) do %>
+                <p><%= @post.title %></p>
+              <% end %>
+                <p><%= @post.introduction %></p>
+              <%= link_to public_customer_path(@post.customer) do %>
+                <p><%= image_tag @post.customer.get_profile_image(100,100) %></p>
+              <% end %>
+              <%= link_to public_customer_path(@post.customer)  do %>
+                <p><%= @post.customer.name %></p>
+              <% end %>
+              <% if @post.customer == current_customer %>
+                <%= link_to "Edit", edit_public_post_path(@post.id) %>
+                <%= link_to "Destroy",public_posts_path(@post), method: :delete %>
+              <% end %>
+            </div>
+        </div>
+    </div>
+</div>

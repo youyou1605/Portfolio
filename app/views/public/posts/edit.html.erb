@@ -1,2 +1,19 @@
-<h1>Public::Posts#edit</h1>
-<p>Find me in app/views/public/posts/edit.html.erb</p>
+<h1>Editing Post</h1>
+<% if @post.errors.any? %>
+  <%= @post.errors.count %>errors prohibited this obj from being saved:
+  <ul>
+    <% @post.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+  </ul>
+<% end %>
+<%= form_with model:@post do |f| %>
+<p>Title</p>
+<%= f.text_field :title %>
+
+<p>Body</p>
+<%= f.text_area :introduction %>
+<%=f.submit 'Update Post' %>
+<% end %>
+<%= link_to "Show",public_posts_path(@post.id) %>
+<%= link_to "Back", '/public/posts' %>
