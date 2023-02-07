@@ -1,28 +1,28 @@
 <div class="col-lg-4" >
-<h1>User info</h1>
-  
-  <h3>name <%= customer.user_name %></h3>
-  <h3>introduction <%= customer.introduction %></h3>
+  <h1>User info</h1>
 
-   <p><%= link_to edit_public_customer_path(customer), class:"btn btn-outline-secondary btn-block edit_user_136" do %></p>
-　 <i class="fas fa-user-cog"></i>
+    <h3>name <%= customer.user_name %></h3>
+    <h3>introduction <%= customer.introduction %></h3>
 
-  <% end %>
+     <p><%= link_to edit_public_customer_path(customer), class:"btn btn-outline-secondary btn-block edit_user_136" do %></p>
+　   <i class="fas fa-user-cog"></i>
 
-<h1>New post</h1>
-<% if post.errors.any? %>
-  <%= post.errors.count %>errors prohibited this obj from being saved:
-  <ul>
-    <% post.errors.full_messages.each do |message| %>
-      <li><%= message %></li>
+     <% end %>
+
+  <h1>New post</h1>
+    <% if post.errors.any? %>
+      <%= post.errors.count %>errors prohibited this obj from being saved:
+      <ul>
+        <% post.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+        <% end %>
+      </ul>
     <% end %>
-  </ul>
-<% end %>
-<%= form_with model: post do |f| %>
-<h4>Title</h4>
-<%= f.text_field :title %>
-<h4>Introduction</h4>
-<%= f.text_area :introduction %>
-<%= f.submit 'Create Post' %>
-<% end %>
+    <%= form_with model: post, url: public_posts_path, local: true do |f| %>
+      <h4>Title</h4>
+      <%= f.text_field :title %>
+      <h4>Introduction</h4>
+      <%= f.text_area :introduction %>
+      <%= f.submit 'Create Post' %>
+    <% end %>
 </div>
