@@ -1,2 +1,17 @@
-<h1>Public::Customers#index</h1>
-<p>Find me in app/views/public/customers/index.html.erb</p>
+<div class="container" >
+  <div class="row">
+    <div class="col-md-3">
+      <%= render 'public/posts/list', customer: @customer, post: @post %>
+    </div>
+    <div class="col-md-8 offset-md-1">
+      <h1>Users</h1>
+      <% @customers.each do |customer| %>
+      <div>
+        <%= image_tag user.get_profile_image(100,100) %>
+        <p>name <%= customer.user_name %></p>
+        <%= link_to "Show", public_customer_path(customer.id) %>
+      </div>
+      <% end %>
+    </div>
+  </div>
+</div>

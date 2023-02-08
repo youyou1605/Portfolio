@@ -1,2 +1,25 @@
-<h1>Public::Customers#show</h1>
-<p>Find me in app/views/public/customers/show.html.erb</p>
+<div>
+    <%= flash[:notice] %>
+</div>
+<div class="container" >
+  <div class="row">
+    <div class="col-md-3">
+      <%= render 'public/posts/list', customer: @customer, post: @post %>
+    </div>
+      <div class="col-md-8 offset-md-1">
+        <h1>Posts</h1>
+        <% @posts.each do |post| %>
+          <div>
+            <%= link_to public_customer_path(post.customer) do %>
+              <p><%= image_tag post.customer.get_profile_image(100,100)  %></p>
+            <% end %>
+              <p>Title</p>
+            <%= link_to public_posts_path(post.id) do %>
+              <p><%= post.title %></p>
+            <% end %>
+              <p>Introduction <%= post.introduction %></p>
+          </div>
+        <% end %>
+      </div>
+  </div>
+</div>
