@@ -7,7 +7,7 @@
       <h1>Users</h1>
       <% @customers.each do |customer| %>
       <div>
-        <%= image_tag user.get_profile_image(100,100) %>
+        <%= image_tag customer.get_profile_image(100,100) %>
         <p>name <%= customer.user_name %></p>
         <%= link_to "Show", public_customer_path(customer.id) %>
       </div>

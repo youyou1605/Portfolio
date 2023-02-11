@@ -52,7 +52,7 @@ class Public::PostsController < ApplicationController
     params.require(:post).permit(:title, :introduction)
   end
 end
-  def current_customer
+  def correct_customer
     @post = Post.find(params[:post_id])
     @customer = @post.customer
     redirect_to(public_posts_path) unless @customer == current_cutomer

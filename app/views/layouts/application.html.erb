@@ -1,16 +1,78 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>PortfolioApp</title>
-    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>フューチャーアイドルとそのファンのためのSNS「Upcoming Idols！！　-カミドルズ!!-</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
+    <meta name="viewport" content="width=device-width,initial-scale=1 maximum-scale=1">
 
-    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
   <body>
-    <%= yield %>
+
+    <header class="navbar navbar-fixed-top navbar-inverse">
+      <div class="container">
+        <nav class="nav navbar-nav navbar-left">
+          <a class="navbar-brand p-3" href="/"><span>Upcoming Idols!!</span></a>
+        </nav>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+                          aria-controls="navbarNavDropdown" aria-expanded="true" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+        <nav>
+          <ul class="nav navbar-nav navbar-right">
+            <% if customer_signed_in? %>
+              <li class="nav-item">
+                <i class="fas fa-home"></i>
+                <%= link_to "Home", public_customers_path(current_customer.id),class: 'nav-link text-dark' %>
+              </li>
+              <li class="nav-item">
+                <i class="fas fa-users"></i>
+                <%= link_to "Users", public_customers_path,class: 'nav-link text-dark'  %>
+              </li>
+              <li class="nav-item">
+                <i class="fas fa-book-open"></i>
+                <%= link_to "Posts", public_posts_path,class: 'nav-link text-dark'  %>
+              </li>
+              <li class="nav-item">
+                <i class="fas fa-sign-out-alt"></i>
+                <%= link_to "Log out", destroy_customer_session_path, method: :delete,class: 'nav-link text-dark'  %>
+              </li>
+            <% else %>
+              <li class="nav-item">
+                <i class="fas fa-home"></i>
+                <%= link_to "Home", root_path,class: 'nav-link text-dark'  %>
+              </li>
+              <li class="nav-item">
+                <i class="fas fa-link"></i>
+                <%= link_to "About", about_path,class: 'nav-link text-dark'  %>
+              </li>
+              <li class="nav-item">
+                <i class="fas fa-user-plus"></i>
+                <%= link_to "Sign up", new_customer_registration_path,class: 'nav-link text-dark'  %>
+              </li>
+              <li class="nav-item">
+                <i class="fas fas fa-sign-in-alt"></i>
+                <%= link_to "Log in", new_customer_session_path,class: 'nav-link text-dark'  %>
+              </li>
+            <% end %>
+          </ul>
+        </nav>
+      </div>
+    </header>
+    <main class="mb-auto">
+      <%= yield %>
+    </main>
+    <footer>
+      <div class="container mt-5">
+  	    <div class="row">
+    	    <div class="mx-auto">
+    		    <p>CopyRight YouYou.inc</p>
+    	    </div>
+        </div>
+      </div>
+    </footer>
   </body>
 </html>

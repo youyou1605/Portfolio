@@ -1,6 +1,6 @@
 class Public::CustomersController < ApplicationController
   def index
-     @customer = current_cutomer
+     @customer = current_customer
     @customers = Customer.all
     @post = Post.new
   end
