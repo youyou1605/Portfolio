@@ -18,6 +18,7 @@
               <p><%= post.title %></p>
             <% end %>
               <p>Introduction <%= post.introduction %></p>
+              <p><%= link_to "#{post.post_comments.count} コメント", public_posts_path(post.id) %></p>
           </div>
         <% end %>
       </div>

@@ -25,6 +25,7 @@
                       <p><%= post.title %></p>
                     <% end %>
                     <p>Opinion <%= post.introduction %></p>
+                    <p><%= link_to "#{post.post_comments.count} コメント", public_posts_path(post.id) %></p>
                   </td>
                 </tr>
               </tbody>
