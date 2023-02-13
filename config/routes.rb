@@ -1,8 +1,9 @@
 Rails.application.routes.draw do
   namespace :public do
     resources :customers,only: [:show, :index, :edit, :create, :update]
-    resources :posts,only: [:show, :index, :edit, :create, :update] do
+    resources :posts,only: [:show, :index, :edit, :create, :update, :destroy] do
       resources :post_comments, only: [:create, :destroy]
+      resource :favorites, only: [:create, :destroy]
     end
   end
   devise_for :admin,skip: [:registrations, :passwords] , controllers: {
