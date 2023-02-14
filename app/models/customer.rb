@@ -7,6 +7,10 @@ class Customer < ApplicationRecord
   has_many :posts,         dependent: :destroy
   has_many :post_comments, dependent: :destroy
   has_many :favorites,     dependent: :destroy
+  has_many :relationships, class_name: "Relationship", foreign_key: "follower_id", dependent: :destroy
+  has_many :reverse_of_relationships, class_name: "Relationship", foreign_key: "followed_id", dependent: :destroy
+  has_many :followings, through: :relationships, source: :followed
+  has_many :followers, through: :reverse_of_relationships, source: :follower
   has_one_attached :profile_image
 
   validates :user_name, {presence: true,uniqueness: true, length: {maximum: 20,minimum:2}}
@@ -25,5 +29,17 @@ class Customer < ApplicationRecord
       customer.password = SecureRandom.urlsafe_base64
       customer.user_name = "guestuser"
     end
+  end
+
+  def follow(customer_id)
+    relationships.create(followed_id: customer_id)
+  end
+
+  def unfollow(customer_id)
+    relationships.find_by(followed_id: customer_id).destroy
+  end
+
+  def following?(customer)
+    followings.include?(customer)
   end
 end
