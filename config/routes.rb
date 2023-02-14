@@ -16,5 +16,9 @@ Rails.application.routes.draw do
   root "homes#top"
   get "/home/about" => "homes#about", as: "about"
 
+  devise_scope :customer do
+    post 'public/guest_sign_in', to: 'public/sessions#guest_sign_in'
+  end
+
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
