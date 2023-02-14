@@ -54,9 +54,9 @@ class Public::PostsController < ApplicationController
   end
 end
   def correct_customer
-    @post = Post.find(params[:post_id])
+    @post = Post.find(params[:id])
     @customer = @post.customer
-    redirect_to(public_posts_path) unless @customer == current_cutomer
+    redirect_to(public_posts_path) unless @customer == current_customer
   end
 
 

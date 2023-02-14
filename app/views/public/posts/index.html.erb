@@ -18,7 +18,7 @@
                 <tr>
                   <td>
                     <% @posts.each do |post| %>
-                   
+
                     <%= link_to public_customer_path(post.customer) do %>
                       <p><%= image_tag post.customer.get_profile_image(100,100) %></p>
                     <% end %>
@@ -26,8 +26,8 @@
                       <p><%= post.title %></p>
                     <% end %>
                     <p>Opinion <%= post.introduction %></p>
-                     
-                    <p><%= link_to "#{post.post_comments.count} コメント", public_posts_path(post.id) %></p>
+
+                    <p><%= link_to "#{post.post_comments.count} コメント", public_post_path(post.id) %></p>
                   </td>
                 </tr>
               </tbody>
