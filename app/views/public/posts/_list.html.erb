@@ -9,6 +9,9 @@
       <% end %>
     <% end %>
 
+    <%= link_to "フォロー", public_relationships_followings_path(customer) %> </br>
+    <%= link_to "フォロワー", public_relationships_followers_path(customer) %>
+
   <h1>New post</h1>
     <% if post.errors.any? %>
       <%= post.errors.count %>errors prohibited this obj from being saved:
