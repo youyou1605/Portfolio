@@ -1,4 +1,10 @@
 Rails.application.routes.draw do
+  namespace :admin do
+    root 'homes#top'
+    resources :posts,only: [:new,:index,:show,:edit,:update,:create]
+    resources :customers,only: [:index,:show,:edit,:update]
+  end
+
   namespace :public do
     get 'relationships/followings'
     get 'relationships/followers'

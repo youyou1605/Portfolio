@@ -1,0 +1,34 @@
+<div class="offset-2">
+  <div class="row mt-4">
+    <mark class="h4 table-secondary">マイページ</mark>
+  </div>
+
+  <div class="row mt-4">
+    <div class="col-xs-offset-1">
+      <table class="table table-bordered table-condensed" >
+        <tbody>
+          <tr>
+            <td class="info table-secondary border-">ユーザーネーム</td>
+            <td class="text-left"><%= @customer.user_name %></td>
+          </tr>
+          <tr>
+            <td class="info table-secondary">メールアドレス</td>
+            <td class="text-left"><%= @customer.email %></td>
+          </tr>
+          <tr>
+            <td class="info table-secondary">会員ステータス</td>
+            <td>
+              <% if @customer.is_deleted %>
+                <p>退会</p>
+              <% else %>
+                <p class="text-success">有効</p>
+            <% end %>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <%= link_to "編集する", edit_admin_customer_path(@customer.id), class: "btn btn-success" %>
+</div>

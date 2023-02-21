@@ -1,0 +1,46 @@
+<div class="offset-2">
+
+  <div class="row mt-4">
+    <mark class="h4 table-secondary">会員一覧</mark>
+  </div>
+
+  <table class="table table-bordered col-10">
+    <thead>
+      <tr>
+        <th class="table-secondary">会員ID</th>
+        <th class="table-secondary">ユーザーネーム</th>
+        <th class="table-secondary">メールアドレス</th>
+        <th class="table-secondary">ステータス</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @customers.each do |t| %>
+        <tr>
+          <td><%= t.id %></td>
+          <td>
+            <%= link_to admin_customer_path(t.id) do %>
+              <%= t.user_name %>
+            <% end %>
+          </td>
+          <td><%= t.email %></td>
+          <td>
+            <% if t.is_deleted %>
+              <p>退会</p>
+            <% else %>
+              <p class="text-success">有効</p>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+  <div class= "container" >
+    <div class= "row" >
+      <div class= "col-8 offset-md-4 py-2 mt-5" >
+        <%#<%= paginate @customers %>
+      </div>
+    </div>
+  </div>
+
+</div>
