@@ -42,4 +42,8 @@ class Customer < ApplicationRecord
   def following?(customer)
     followings.include?(customer)
   end
+
+ def liked_by?(post_id)
+    likes.where(post_id: post_id).exists?
+ end
 end
