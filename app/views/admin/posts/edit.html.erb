@@ -1,2 +1,32 @@
-<h1>Admin::Posts#edit</h1>
-<p>Find me in app/views/admin/posts/edit.html.erb</p>
+<div class= "container my-5">
+  <div class= "row">
+    <h2>投稿編集</h2>
+  </div>
+
+  <div class= "row d-flex justify-content-center">
+    <% if flash[:post_updated_error] %>
+    <span class="text-danger"><%= flash[:post_updated_error] %></span>
+    <% end %>
+  </div>
+  <%= form_for(@post, url: edit_admin_post_path) do |f| %>
+  <div class="row mt-3">
+    <div class="col-sm-3">
+      <%= f.label :投稿画像 %>
+      <%= f.file_field :image %>
+    </div>
+    <div class="col-sm-5">
+      <div class="form-group row">
+        <%= f.label :タイトル, class: "col-sm-4" %>
+        <%= f.text_field :name, class: "form-control col-sm-8" %>
+      </div>
+      <div class="form-group row">
+        <%= f.label :説明, class: "col-sm-4" %>
+        <%= f.text_area :introduction, class: "form-control col-sm-8" %>
+      </div>
+    </div>
+    <div class="col-sm-3 mt-auto ml-5">
+        <%= f.submit :変更を保存, class: "btn btn-primary" %>
+    </div>
+  </div>
+  <% end %>
+</div>

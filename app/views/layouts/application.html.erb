@@ -11,57 +11,11 @@
   </head>
 
   <body>
-
-    <header class="navbar navbar-expand-lg navbar-dark bg-dark">
-      <div class="container">
-        <nav class="nav navbar-nav navbar-left">
-          <a class="navbar-brand" href="/"><span>Upcoming Idols!!</span></a>
-        </nav>
-          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
-                          aria-controls="navbarNavDropdown" aria-expanded="true" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-        <nav>
-          <ul class="nav navbar-nav navbar-right">
-            <% if customer_signed_in? %>
-              <li class="nav-item">
-                <i class="fas fa-home"></i>
-                <%= link_to "Home", public_customers_path(current_customer.id),class: 'nav-link text-dark' %>
-              </li>
-              <li class="nav-item">
-                <i class="fas fa-users"></i>
-                <%= link_to "Users", public_customers_path,class: 'nav-link text-dark'  %>
-              </li>
-              <li class="nav-item">
-                <i class="fas fa-book-open"></i>
-                <%= link_to "Posts", public_posts_path,class: 'nav-link text-dark'  %>
-              </li>
-              <li class="nav-item">
-                <i class="fas fa-sign-out-alt"></i>
-                <%= link_to "Log out", destroy_customer_session_path, method: :delete,class: 'nav-link text-dark'  %>
-              </li>
-            <% else %>
-              <li class="nav-item">
-                <i class="fas fa-home"></i>
-                <%= link_to "Home", root_path,class: 'nav-link text-dark'  %>
-              </li>
-              <li class="nav-item">
-                <i class="fas fa-link"></i>
-                <%= link_to "About", about_path,class: 'nav-link text-dark'  %>
-              </li>
-              <li class="nav-item">
-                <i class="fas fa-user-plus"></i>
-                <%= link_to "Sign up", new_customer_registration_path,class: 'nav-link text-dark'  %>
-              </li>
-              <li class="nav-item">
-                <i class="fas fas fa-sign-in-alt"></i>
-                <%= link_to "Log in", new_customer_session_path,class: 'nav-link text-dark'  %>
-              </li>
-            <% end %>
-          </ul>
-        </nav>
-      </div>
-    </header>
+    <% if admin_signed_in? %>
+      <%= render 'layouts/admin_header' %>
+    <% else %>
+      <%= render 'layouts/customers_header' %>
+    <% end %>
     <main class="mb-auto">
       <%= yield %>
     </main>

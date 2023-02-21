@@ -6,7 +6,8 @@ class Admin::PostsController < ApplicationController
   end
 
   def index
-    @posts = Post.page(params[:page]).per(10)
+    #@posts = Post.page(params[:page]).per(10)
+     @posts = Post.where(id: params[:id])
   end
 
   def show

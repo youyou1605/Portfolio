@@ -1,2 +1,40 @@
-<h1>Admin::Posts#index</h1>
-<p>Find me in app/views/admin/posts/index.html.erb</p>
+<div class="container" >
+    <div class="row">
+        <div class="col-md-3">
+          <%#= render 'public/posts/list', customer: @customer, post: @post %>
+        </div>
+        <div class="col-md-8 offset-md-1">
+          <h1>Posts</h1>
+            <table class="table table-hover table-inverse">
+              <thead>
+                <tr>
+                  <th colspan="2"></th>
+                    <th>Title</th>
+                    <th>introduction</th>
+                    <th>comments</th>
+                    <th colspan="2"></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>
+                    <% @posts.each do |post| %>
+
+                    <td><%= link_to public_customer_path(post.customer) do %>
+                      <%= image_tag post.customer.get_profile_image(100,100) %></td>
+                    <% end %>
+                      <td><%= link_to public_post_path(post) do %>
+                      <%= post.title %></td>
+                    <% end %>
+                     <td><%= post.introduction %></td>
+
+                    <td><%= link_to "#{post.post_comments.count} コメント", public_post_path(post.id) %></td>
+
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          <% end %>
+        </div>
+      </div>
+</div>
