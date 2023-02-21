@@ -8,19 +8,35 @@
     </div>
       <div class="col-md-8 offset-md-1">
         <h1>Posts</h1>
-        <% @posts.each do |post| %>
-          <div>
-            <%= link_to public_customer_path(post.customer) do %>
-              <p><%= image_tag post.customer.get_profile_image(100,100)  %></p>
-            <% end %>
-              <p>Title</p>
-            <%= link_to public_posts_path(post.id) do %>
-              <p><%= post.title %></p>
-            <% end %>
-              <p>Introduction <%= post.introduction %></p>
-              <p><%= link_to "#{post.post_comments.count} コメント", public_posts_path(post.id) %></p>
-          </div>
-        <% end %>
+          <table class="table table-hover table-inverse">
+              <thead>
+                <tr>
+                  <th colspan="2"></th>
+                    <th>Title</th>
+                    <th>introduction</th>
+                    <th>comments</th>
+                    <th colspan="2"></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <% @posts.each do |post| %>
+                  <td>
+                      <td>
+                        <%= link_to public_customer_path(post.customer) do %>
+                          <%= image_tag post.customer.get_profile_image(100,100) %></td>
+                        <% end %>
+                      <td>
+                        <%= link_to public_post_path(post) do %>
+                          <%= post.title %></td>
+                        <% end %>
+                      <td><%= post.introduction %></td>
+                      <td><%= link_to "#{post.post_comments.count} コメント", public_post_path(post.id) %></td>
+                  </td>
+                </tr>
+                 <% end %>
+              </tbody>
+            </table>
+        </div>
       </div>
-  </div>
 </div>

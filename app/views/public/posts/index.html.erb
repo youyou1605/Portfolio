@@ -17,24 +17,23 @@
               </thead>
               <tbody>
                 <tr>
+                  <% @posts.each do |post| %>
                   <td>
-                    <% @posts.each do |post| %>
-
-                    <td><%= link_to public_customer_path(post.customer) do %>
-                      <%= image_tag post.customer.get_profile_image(100,100) %></td>
-                    <% end %>
-                      <td><%= link_to public_post_path(post) do %>
-                      <%= post.title %></td>
-                    <% end %>
+                    <td>
+                      <%= link_to public_customer_path(post.customer) do %>
+                        <%= image_tag post.customer.get_profile_image(100,100) %></td>
+                      <% end %>
+                      <td>
+                        <%= link_to public_post_path(post) do %>
+                          <%= post.title %></td>
+                        <% end %>
                      <td><%= post.introduction %></td>
-
-                    <td><%= link_to "#{post.post_comments.count} コメント", public_post_path(post.id) %></td>
-
+                     <td><%= link_to "#{post.post_comments.count} コメント", public_post_path(post.id) %></td>
                   </td>
                 </tr>
+                 <% end %>
               </tbody>
             </table>
-          <% end %>
         </div>
       </div>
 </div>

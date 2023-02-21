@@ -7,44 +7,56 @@
                           aria-controls="navbarNavDropdown" aria-expanded="true" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
-        <nav>
-          <ul class="nav navbar-nav navbar-right">
-            <% if customer_signed_in? %>
-              <li class="nav-item">
-                <i class="fas fa-home"></i>
-                <%= link_to "Home", public_customers_path(current_customer.id),class: 'nav-link text-dark' %>
-              </li>
-              <li class="nav-item">
-                <i class="fas fa-users"></i>
-                <%= link_to "Users", public_customers_path,class: 'nav-link text-dark'  %>
-              </li>
-              <li class="nav-item">
-                <i class="fas fa-book-open"></i>
-                <%= link_to "Posts", public_posts_path,class: 'nav-link text-dark'  %>
-              </li>
-              <li class="nav-item">
-                <i class="fas fa-sign-out-alt"></i>
-                <%= link_to "Log out", destroy_customer_session_path, method: :delete,class: 'nav-link text-dark'  %>
-              </li>
-            <% else %>
-              <li class="nav-item">
-                <i class="fas fa-home"></i>
-                <%= link_to "Home", root_path,class: 'nav-link text-dark'  %>
-              </li>
-              <li class="nav-item">
-                <i class="fas fa-link"></i>
-                <%= link_to "About", about_path,class: 'nav-link text-dark'  %>
-              </li>
-              <li class="nav-item">
-                <i class="fas fa-user-plus"></i>
-                <%= link_to "Sign up", new_customer_registration_path,class: 'nav-link text-dark'  %>
-              </li>
-              <li class="nav-item">
-                <i class="fas fas fa-sign-in-alt"></i>
-                <%= link_to "Log in", new_customer_session_path,class: 'nav-link text-dark'  %>
-              </li>
-            <% end %>
+       <div class="collapse navbar-collapse" id="navbarNavDropdown">
+          <ul class="navbar-nav ml-auto">
+          <p id="notice"><%= notice %></p>
+          <% if customer_signed_in? %>
+            <li class="nav-item">
+              <button type="button" class="btn btn-outline-dark btn-nm ">
+                <%= link_to "Users", public_customers_path, class: 'nav-link text-white' %>
+              </button>
+            </li>
+            <li class="nav-item ml-2">
+              <button type="button" class="btn btn-outline-dark btn-nm">
+                <%= link_to "Posts", public_posts_path, class: 'nav-link text-white' %>
+              </button>
+            </li>
+            <li class="nav-item ml-2">
+              <button type="button" class="btn btn-outline-dark btn-nm">
+                <%= link_to "Logout", destroy_customer_session_path, method: :delete, class: 'nav-link text-white' %>
+              </button>
+            </li>
+          <% elsif admin_signed_in? %>
+            <li class="nav-item ml-2">
+              <button type="button" class="btn btn-outline-dark btn-nm">
+                <%= link_to "Logout", destroy_admin_session_path, method: :delete, class: 'nav-link text-white' %>
+              </button>
+            </li>
+          <% else %>
+            <li class="nav-item">
+              <button type="button" class="btn btn-outline-dark btn-nm">
+                <%= link_to "About", about_path, class: 'nav-link text-white' %>
+              </button>
+            </li>
+            <li class="nav-item ml-2">
+              <button type="button" class="btn btn-outline-dark btn-nm">
+                <%= link_to "Posts", public_post_path, class: 'nav-link text-white' %>
+              </button>
+            </li>
+            <li class="nav-item ml-2">
+              <button type="button" class="btn btn-outline-dark btn-nm">
+                <%= link_to "SignUp", new_customer_registration_path, class: 'nav-link text-white' %>
+              </button>
+            </li>
+            <li class="nav-item ml-2">
+              <button type="button" class="btn btn-outline-dark btn-nm">
+                <%= link_to "Login", new_customer_session_path, class: 'nav-link text-white' %>
+              </button>
+            </li>
           </ul>
-        </nav>
-      </div>
-    </header>
+          <% end %>
+        </div>
+
+    </div>
+  </nav>
+</header>
