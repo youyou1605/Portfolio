@@ -1,16 +1,16 @@
-<div class="col-lg-4" >
+<div class="col-lg-12" >
   <h1>User info</h1>
     <%= image_tag customer.get_profile_image(100,100) %>
     <h3>name <%= customer.user_name %></h3>
     <h3>introduction <%= customer.introduction %></h3>
       <% if customer.user_name != "guestuser" %>
-        <p><%= link_to edit_public_customer_path(customer), class:"btn btn-outline-secondary btn-block edit_user_136" do %></p>
+        <p><%= link_to edit_public_customer_path(customer), class:"btn btn-outline-secondary btn-block" do %></p>
 　      <i class="fas fa-user-cog"></i>
       <% end %>
     <% end %>
 
-    <%= link_to "フォロー", public_relationships_followings_path(customer) %> </br>
-    <%= link_to "フォロワー", public_relationships_followers_path(customer) %>
+    <%= link_to "フォロー", public_relationships_followings_path(customer),class: 'btn btn-primary btn-block'%> </br>
+    <%= link_to "フォロワー", public_relationships_followers_path(customer),class: 'btn btn-primary btn-block'%>
 
   <h1>New post</h1>
     <% if post.errors.any? %>
