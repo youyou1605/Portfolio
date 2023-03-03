@@ -1,0 +1,1 @@
+$('#relationship_<%= @customer.id %>').html("<%= j(render partial: 'relationships/relationship', locals: { customer: @customer }) %>");

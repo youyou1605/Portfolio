@@ -4,16 +4,16 @@ Rails.application.routes.draw do
     resources :posts,only: [:index,:show,:edit,:update,:create]
     resources :customers,only: [:index,:show,:edit,:update]
   end
-
-  namespace :public do
+namespace :public do
     get 'relationships/followings'
     get 'relationships/followers'
   end
   namespace :public do
     resources :customers,only: [:show, :index, :edit, :create, :update] do
       resource :relationships, only: [:create, :destroy]
-      get 'followings' => 'relationships#followings', as: 'followings'
-      get 'followers' => 'relationships#followers', as: 'followers'
+      member do
+        get :followings, :followers
+      end
     end
     resources :posts,only: [:show, :index, :edit, :create, :update, :destroy] do
       resources :post_comments, only: [:create, :destroy]
