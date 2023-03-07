@@ -3,6 +3,7 @@ class Post < ApplicationRecord
   belongs_to :customer
   has_many :post_comments, dependent: :destroy
   has_many :favorites,     dependent: :destroy
+  has_many :favorited_customers, through: :favorites, source: :customer
 
    validates :title, presence: true
    validates :introduction, {presence: true, length: {maximum: 200}}

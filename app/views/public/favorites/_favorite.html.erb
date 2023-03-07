@@ -1,0 +1,14 @@
+<% if !customer_signed_in? %>
+  <i class="fa fa-heart like-btn"></i>
+  <%= post.favorites.length %>
+<% elsif current_customer.liked_by?(post.id) %>
+  <%= link_to public_post_favorites_path(post, post.favorites), class: "like-link", method: :delete, remote: true do %>
+    <i class="fa fa-heart unlike-btn"></i>
+  <% end %>
+  <%= post.favorites.length %>
+<% else %>
+  <%= link_to public_post_favorites_path(post), class: "like-link", method: :post, remote: true do %>
+    <i class="fa fa-heart like-btn"></i>
+  <% end %>
+  <%= post.favorites.length %>
+<% end %>

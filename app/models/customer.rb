@@ -7,6 +7,7 @@ class Customer < ApplicationRecord
   has_many :posts,         dependent: :destroy
   has_many :post_comments, dependent: :destroy
   has_many :favorites,     dependent: :destroy
+  has_many :favorited_posts, through: :favorites, source: :post
 
   has_many :relationships, dependent: :destroy
   has_many :followings, through: :relationships, source: :follower
@@ -32,7 +33,7 @@ class Customer < ApplicationRecord
       customer.user_name = "guestuser"
     end
   end
-  
+
   def following?(customer)
     followings.include?(customer)
   end
@@ -46,6 +47,6 @@ class Customer < ApplicationRecord
   end
 
  def liked_by?(post_id)
-    likes.where(post_id: post_id).exists?
+    favorites.where(post_id: post_id).exists?
  end
 end
