@@ -7,6 +7,7 @@ Rails.application.routes.draw do
 namespace :public do
     get 'relationships/followings'
     get 'relationships/followers'
+    get "search" => "searches#search"
   end
   namespace :public do
     resources :customers,only: [:show, :index, :edit, :create, :update] do
