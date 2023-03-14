@@ -49,16 +49,16 @@ class Customer < ApplicationRecord
  def liked_by?(post_id)
     favorites.where(post_id: post_id).exists?
  end
- 
+
  def self.looks(search, word)
     if search == "perfect_match"
-      @customer = Customer.where("name LIKE?", "#{word}")
+      @customer = Customer.where("user_name LIKE?", "#{word}")
     elsif search == "forward_match"
-      @customer = Customer.where("name LIKE?","#{word}%")
+      @customer = Customer.where("user_name LIKE?","#{word}%")
     elsif search == "backward_match"
-      @customer = Customer.where("name LIKE?","%#{word}")
+      @customer = Customer.where("user_name LIKE?","%#{word}")
     elsif search == "partial_match"
-      @customer = Customer.where("name LIKE?","%#{word}%")
+      @customer = Customer.where("user_name LIKE?","%#{word}%")
     else
       @customer = Customer.all
     end
