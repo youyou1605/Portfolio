@@ -44,13 +44,19 @@ class Public::PostsController < ApplicationController
 
   def destroy
     @post = Post.find(params[:id])
-    @post.destroy
-    redirect_to '/public/posts'
+    if @post.customer_id == current_customer.id
+      @post.destroy
+      redirect_to '/public/posts'
+      flash[:notice] = "投稿を削除しました"
+    else
+      redirect_to '/public/posts'
+      flash[:alert] = "他人の投稿は削除できません"
+    end
   end
 
-  private
+private
   def post_params
-    params.require(:post).permit(:title, :introduction)
+   params.require(:post).permit(:title, :introduction)
   end
 end
   def correct_customer

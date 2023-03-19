@@ -52,18 +52,18 @@ private
     params.require(:customer).permit(:id,:user_name,:profile_image,:introduction,:is_deleted)
   end
 end
-def correct_customer
+  def correct_customer
     @post = Post.find(params[:id])
     @customer = @post.customer
     redirect_to(public_posts_path) unless @customer == current_customer
-end
-def ensure_guest_user
+  end
+  def ensure_guest_user
     @customer = Customer.find(params[:id])
     if @customer.user_name == "guestuser"
       redirect_to public_customer_path(current_customer) , notice: 'ゲストユーザーはプロフィール編集画面へ遷移できません。'
     end
-end
+  end
 
-def set_customer
+  def set_customer
     @customer = Customer.find(params[:id])
   end
