@@ -38,31 +38,39 @@
                   <td>
                     <p><%= @post.introduction %></p>
                   </td>
+                </tr>
                 <tr>
-                  <% if @post.customer == current_customer %>
-                    <%= link_to "Edit", edit_public_post_path(@post.id) %>
-                    <%= link_to "Destroy",public_post_path(@post), method: :delete %>
-                  <% end %>
-                  <div>
-                  <%= form_with model: [@post, @post_comment], url: public_post_post_comments_path(@post) do |f| %>
-                    <%= f.text_area :comment, rows: '5', placeholder: "コメントをここに" %>
-                    <%= f.submit "送信する" %>
-                  <% end %>
-                  </div>
-                  <div id = "favorite_<%= @post.id %>">
-                    <%= render partial: "public/favorites/favorite", locals: { post: @post } %>
-                  </div>
-                  <div>
-                    <p>コメント件数：<%= @post.post_comments.count %></p>
-                    <% @post.post_comments.each do |post_comment| %>
-                      <p><%= image_tag post_comment.customer.get_profile_image(100,100) %></p>
-                      <%= post_comment.customer.user_name %>
-                      <%= post_comment.created_at.strftime('%Y/%m/%d') %><%= post_comment.comment %>
-                      <% if post_comment.customer == current_customer %>
-                        <%= link_to "削除", public_post_post_comment_path(post_comment.post, post_comment), method: :delete %>
-                      <% end %>
+                  <td></td>
+                  <td>
+                    <% if @post.customer == current_customer %>
+                      <%= link_to "Edit", edit_public_post_path(@post.id) %>
+                      <%= link_to "Destroy",public_post_path(@post), method: :delete %>
                     <% end %>
-                  </div>
+                    <div>
+                    <%= form_with model: [@post, @post_comment], url: public_post_post_comments_path(@post) do |f| %>
+                      <%= f.text_area :comment, rows: '5', placeholder: "コメントをここに" %>
+                      <%= f.submit "送信する" %>
+                    <% end %>
+                    </div>
+                  </td>
+                  <td>
+                    <div id = "favorite_<%= @post.id %>">
+                      <%= render partial: "public/favorites/favorite", locals: { post: @post } %>
+                    </div>
+                  </td>
+                  <td>
+                    <div>
+                      <p>コメント件数：<%= @post.post_comments.count %></p>
+                      <% @post.post_comments.each do |post_comment| %>
+                        <p><%= image_tag post_comment.customer.get_profile_image(100,100) %></p>
+                        <%= post_comment.customer.user_name %>
+                        <%= post_comment.created_at.strftime('%Y/%m/%d') %><%= post_comment.comment %>
+                        <% if post_comment.customer == current_customer %>
+                          <%= link_to "削除", public_post_post_comment_path(post_comment.post, post_comment), method: :delete %>
+                        <% end %>
+                      <% end %>
+                    </div>
+                  </td>
                 </tr>
             </tbody>
 　　　　  </table>
