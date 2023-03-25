@@ -17,7 +17,7 @@ class Public::CustomersController < ApplicationController
     customer_id = params[:id].to_i
     login_customer_id = current_customer.id
   if(customer_id != login_customer_id)
-    redirect_to public_customer_path(current_cutomer)
+    redirect_to public_customer_path(current_customer)
   end
     @customer = Customer.find(params[:id])
   end
