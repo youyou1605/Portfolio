@@ -42,16 +42,16 @@
                 <tr>
                   <td></td>
                   <td>
-                    <% if @post.customer == current_customer %>
-                      <%= link_to "Edit", edit_public_post_path(@post.id) %>
-                      <%= link_to "Destroy",public_post_path(@post), method: :delete %>
-                    <% end %>
                     <div>
                     <%= form_with model: [@post, @post_comment], url: public_post_post_comments_path(@post) do |f| %>
                       <%= f.text_area :comment, rows: '5', placeholder: "コメントをここに" %>
                       <%= f.submit "送信する" %>
                     <% end %>
                     </div>
+                    <% if @post.customer == current_customer %>
+                      <%= link_to "Edit", edit_public_post_path(@post.id) %>
+                      <%= link_to "Destroy",public_post_path(@post), method: :delete %>
+                    <% end %>
                   </td>
                   <td>
                     <div id = "favorite_<%= @post.id %>">
