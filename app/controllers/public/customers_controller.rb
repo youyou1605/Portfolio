@@ -2,7 +2,7 @@ class Public::CustomersController < ApplicationController
   before_action :ensure_guest_user, only: [:edit]
   before_action :set_customer, only: [:followings, :followers]
   def index
-     @customer = current_customer
+    @customer = current_customer
     @customers = Customer.all
     @post = Post.new
   end
