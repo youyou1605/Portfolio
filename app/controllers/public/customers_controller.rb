@@ -38,13 +38,17 @@ class Public::CustomersController < ApplicationController
     end
   end
 
-  def followings
-    @customers = @customer.followings
-  end
-
   def followers
-    @customers = @customer.followers
-  end
+  　@customer = Customer.find(params[:id])
+  　@customers = @customer.followers || []
+　end
+
+　def followings
+  　@customer = Customer.find(params[:id])
+  　@customers = @customer.followings || []
+　end
+end
+
 
 private
 
