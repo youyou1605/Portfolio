@@ -12,6 +12,8 @@ namespace :public do
   namespace :public do
     resources :customers,only: [:show, :index, :edit, :create, :update] do
       resource :relationships, only: [:create, :destroy]
+    end
+    resources :customers do
       member do
         get :followings, :followers
       end

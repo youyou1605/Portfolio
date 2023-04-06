@@ -8,11 +8,11 @@
       <table class="table table-hover table-inverse">
               <thead>
                 <tr>
-                  <th colspan=2></th>
+                  <th colspan=3></th>
                     <th>Name</th>
                     <th>Detail</th>
                     <th>Follow</th>
-                    <th colspan=4></th>
+                    <th colspan=3></th>
                 </tr>
               </thead>
               <tbody>
@@ -22,16 +22,17 @@
                       <td>
                         <%= image_tag customer.get_profile_image(100,100) %>
                         <td><%= customer.user_name %><td>
-                        <td><%= link_to "Show", public_customer_path(customer.id) %></td>
-                          <td id = "relationship_<%= @customer.id %>">
-                            <%= render "public/customers/relationship", locals: { customer: @customer } %>
-                          </td>
-                          <td>
-                            <div id = "relationship_<%= @customer.id %>">
-                              <%= render partial: "public/customers/relationship", locals: { customer: @customer } %>
-                            </div>
-                          </td>
-                      </td>
+                          <td><%= link_to "Show", public_customer_path(customer.id) %></td>
+                            <td>
+  　　　　　　　　　　　　  　　　　　　　　　　　　<% if customer_signed_in? && current_customer.id != customer.id %>
+    　　　　　　　　　　      　　　　　　　　<% if current_customer.following?(customer) %>
+                                <%= link_to "フォロー解除", public_customer_relationship_path(customer_id: @customer.id, id: current_customer.relationships.find_by(follower_id: @customer.id)), method: :delete, remote: true %>
+                              <% else %>
+                                <%= link_to "フォロー", public_customer_relationships_path(customer_id: customer.id), method: :post, remote: true %>
+                              <% end %>
+                              <% end %>
+                            </td>
+                        </td>
                     </td>
                 </tr>
                  <% end %>
