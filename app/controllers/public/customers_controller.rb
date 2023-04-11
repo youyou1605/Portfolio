@@ -1,6 +1,7 @@
 class Public::CustomersController < ApplicationController
   before_action :ensure_guest_user, only: [:edit]
   before_action :set_customer, only: [:followers, :followings]
+
   def index
     @customer = current_customer
     @customers = Customer.all
@@ -16,9 +17,9 @@ class Public::CustomersController < ApplicationController
   def edit
     customer_id = params[:id].to_i
     login_customer_id = current_customer.id
-  if(customer_id != login_customer_id)
-    　redirect_to public_customer_path(current_customer)
-  end
+    if(customer_id != login_customer_id)
+      redirect_to public_customer_path(current_customer)
+    end
     @customer = Customer.find(params[:id])
   end
 
@@ -39,16 +40,14 @@ class Public::CustomersController < ApplicationController
   end
 
   def followers
-  　@customers = @customer.followers || []
-　end
+    @customers = @customer.followers || []
+  end
 
-　def followings
-  　@customers = @customer.followings || []
-　end
-end
+  def followings
+    @customers = @customer.followings || []
+  end
 
-
-private
+  private
 
   def customer_params
     params.require(:customer).permit(:id,:user_name,:profile_image,:introduction,:is_deleted)
@@ -68,7 +67,6 @@ private
   end
 
   def set_customer
- 　　 @customer = Customer.find(params[:id])
-　end
-end
+    @customer = Customer.find(params[:id])
+  end
 end
