@@ -1,1 +1,3 @@
-$('#relationship_<%= @customer.id %>').html("<%= j(render partial: 'relationships/relationship', locals: { customer: @customer }) %>");
+// destroy.js.erb
+$('#unfollow-button-<%= @customer.id %>').hide();
+$('#follow-button-<%= @customer.id %>').show();

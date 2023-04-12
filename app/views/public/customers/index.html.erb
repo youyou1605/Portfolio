@@ -26,9 +26,9 @@
                             <td>
   　　　　　　　　　　　　  　　　　　　　　　　　　<% if customer_signed_in? && current_customer.id != customer.id %>
     　　　　　　　　　　      　　　　　　　　<% if current_customer.following?(customer) %>
-                                <%= link_to "フォロー解除", public_customer_relationship_path(customer_id: @customer.id, id: current_customer.relationships.find_by(follower_id: @customer.id)), method: :delete, remote: true %>
+                              　<%= link_to "フォロー解除", public_customer_relationship_path(customer_id: customer.id, id: current_customer.relationships.find_by(followed_id: customer.id)), method: :delete, remote: true, id: "unfollow-button-#{customer.id}", class: "btn btn-primary" %>
                               <% else %>
-                                <%= link_to "フォロー", public_customer_relationships_path(customer_id: customer.id), method: :post, remote: true %>
+                              　<%= link_to "フォロー", public_customer_relationships_path(customer_id: customer.id), method: :post, remote: true, id: "follow-button-#{customer.id}", class: "btn btn-primary" %>
                               <% end %>
                               <% end %>
                             </td>
