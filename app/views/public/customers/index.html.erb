@@ -1,4 +1,4 @@
-<div class="container" >
+<div class="container">
   <div class="row">
     <div class="col-md-3">
       <%= render 'public/posts/list', customer: @customer, post: @post %>
@@ -6,38 +6,35 @@
     <div class="col-md-8 offset-md-1">
       <h1>Users</h1>
       <table class="table table-hover table-inverse">
-              <thead>
-                <tr>
-                  <th colspan=3></th>
-                    <th>Name</th>
-                    <th>Detail</th>
-                    <th>Follow</th>
-                    <th colspan=3></th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <% @customers.each do |customer| %>
-                    <td>
-                      <td>
-                        <%= image_tag customer.get_profile_image(100,100) %>
-                        <td><%= customer.user_name %><td>
-                          <td><%= link_to "Show", public_customer_path(customer.id) %></td>
-                            <td>
-  　　　　　　　　　　　　  　　　　　　　　　　　　<% if customer_signed_in? && current_customer.id != customer.id %>
-    　　　　　　　　　　      　　　　　　　　<% if current_customer.following?(customer) %>
-                              　<%= link_to "フォロー解除", public_customer_relationship_path(customer_id: customer.id, id: current_customer.relationships.find_by(followed_id: customer.id)), method: :delete, remote: true, id: "unfollow-button-#{customer.id}", class: "btn btn-primary" %>
-                              <% else %>
-                              　<%= link_to "フォロー", public_customer_relationships_path(customer_id: customer.id), method: :post, remote: true, id: "follow-button-#{customer.id}", class: "btn btn-primary" %>
-                              <% end %>
-                              <% end %>
-                            </td>
-                        </td>
-                    </td>
-                </tr>
-                 <% end %>
-              </tbody>
-            </table>
-        </div>
-      </div>
+        <thead>
+          <tr>
+            <th></th>
+            <th>Name</th>
+            <th>Detail</th>
+            <th>Follow</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @customers.each do |customer| %>
+            <tr>
+              <td><%= image_tag customer.get_profile_image(100,100) %></td>
+              <td><%= customer.user_name %></td>
+              <td><%= link_to "Show", public_customer_path(customer.id) %></td>
+              <td>
+                <% if customer_signed_in? && current_customer.id != customer.id %>
+                  <% if current_customer.following?(customer) %>
+                    <%= link_to "フォロー解除", public_customer_relationship_path(customer_id: customer.id, id: current_customer.relationships.find_by(followed_id: customer.id)), method: :delete, remote: true, id: "unfollow-button-#{customer.id}", class: "btn btn-primary" %>
+                  <% else %>
+                    <%= link_to "フォロー", public_customer_relationships_path(customer_id: customer.id), method: :post, remote: true, id: "follow-button-#{customer.id}", class: "btn btn-primary" %>
+                  <% end %>
+                <% end %>
+              </td>
+              <td></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
 </div>
